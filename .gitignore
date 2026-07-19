@@ -1,0 +1,14 @@
+# Carpetas de compilación generadas automáticamente
+Debug/
+Release/
+
+# Archivos binarios y de objetos de C++
+*.o
+*.d
+*.axf
+*.bin
+*.hex
+*.map
+
+# Configuraciones temporales del IDE del usuario
+.launches/
