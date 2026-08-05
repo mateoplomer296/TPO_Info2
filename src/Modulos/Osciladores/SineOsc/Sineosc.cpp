@@ -13,7 +13,6 @@ bool     Sineosc::s_tableReady = false;
 Sineosc::Sineosc(uint32_t freq_hz, uint16_t amplitude):Oscilador(freq_hz, amplitude)
 {
 	buildTable();
-
 }
 
 uint16_t  Sineosc::lookupShape(uint32_t phase)
@@ -24,7 +23,6 @@ uint16_t  Sineosc::lookupShape(uint32_t phase)
 
 void Sineosc::buildTable()
 {
-
 
 	if (s_tableReady) return;
 

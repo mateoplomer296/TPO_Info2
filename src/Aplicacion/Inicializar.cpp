@@ -27,7 +27,10 @@ DigitalInputs Stop(0,12,Gpio::BAJO);
 //Intext Emergencia(0,0,12,CallbackE);
 
 //Gpio buzzer(0,29,Gpio::SALIDA,Gpio::ALTO);
-Sineosc sine(440000,512);
+Sineosc sine(440000,128);
+Squareosc squa(440000,128);
+Sawosc saw (44000,128);
+
 void Scheduler (void){
 	uint8_t i;
 	for(i=0; i<PerifericoTemporizado::m_countPerifericosTemporizados; i++)
@@ -48,7 +51,7 @@ void Inicializar ( void )
 	SYSCON->FRODIRECTCLKUEN |= 1;
 
 
-	ledV.Apagar();
+	ledV.Encender();
 	ledA.Apagar();
 	ledR.Apagar();
 	SysTick_Config(30000);

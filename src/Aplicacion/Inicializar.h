@@ -9,7 +9,8 @@
 #define APLICACION_INICIALIZAR_H_
 
 #include "Sineosc.h"
-
+#include "Squareosc.h"
+#include "Sawosc.h"
 
 #include "Gpio.h"
 #include <Pulsador.h>
@@ -34,6 +35,8 @@ extern DigitalInputs Start;
 extern DigitalInputs Stop;
 
 extern Sineosc sine;
+extern Squareosc squa;
+extern Sawosc saw;
 
 void Scheduler (void);
 void Callback1(void);

@@ -21,8 +21,8 @@ class Oscilador{
 
 
 	// Convierte frecuencia a phaseIncrement.
-   // Formula: phaseInc = (freq * 2^32) / sampleRate
-   // Se usa solo en setFreq(), no en la ISR.
+	// Formula: phaseInc = (freq * 2^32) / sampleRate
+	// Se usa solo en setFreq(), no en la ISR.
 	uint32_t freqToPhaseInc(uint32_t freq_mHz) //milihertz
 	{
        // Evitamos overflow de 32 bits operando en 64 bits.

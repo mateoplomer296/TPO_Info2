@@ -1,17 +1,17 @@
 #include "Inicializar.h"
 
 Timer timerled(Timer::SEG,Callback1);
-volatile uint32_t i = 440000;
+volatile uint32_t i = 200000;
 
 void Callback1(void)
 {
 	i = i + 30000;
 	ledV.CambiarEstado();
-	sine.setFreq(i);
+	saw.setFreq(i);
 	timerled.TimerStart(1);
 }
 void CallbackAudio(){
-	uint16_t muestra = sine.nextSample();
+	uint16_t muestra = saw.nextSample();
 
 	DacWrite(muestra);
 }
