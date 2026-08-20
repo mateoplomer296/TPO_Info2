@@ -7,7 +7,7 @@
 
 #include <TriOsc/Triosc.h>
 
-Triosc::Triosc() {
+Triosc::Triosc(uint32_t freq_hz, uint16_t amplitude):Oscilador(freq_hz, amplitude) {
 	// TODO Auto-generated constructor stub
 
 }

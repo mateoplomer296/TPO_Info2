@@ -11,7 +11,7 @@
 class Triosc :public Oscilador
 {
 public:
-	Triosc();
+	Triosc(uint32_t freq_hz, uint16_t amplitude);
 	virtual ~Triosc();
 
 protected:

@@ -24,6 +24,7 @@
 #include "LPC845.h"
 #include "Ctimer.h"
 #include "DacConfig.h"
+#include "AdcConfig.h"
 
 extern Gpio Rele;
 

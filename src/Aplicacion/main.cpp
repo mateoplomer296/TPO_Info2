@@ -7,11 +7,11 @@ void Callback1(void)
 {
 	i = i + 30000;
 	ledV.CambiarEstado();
-	saw.setFreq(i);
+	sine.setFreq(i);
 	timerled.TimerStart(1);
 }
 void CallbackAudio(){
-	uint16_t muestra = saw.nextSample();
+	uint16_t muestra = sine.nextSample();
 
 	DacWrite(muestra);
 }
