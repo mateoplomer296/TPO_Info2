@@ -24,6 +24,7 @@ void AdcConfig(void)
 
 	ADC0->CTRL = (29 << 0); // Operación normal a 1MHz — más que suficiente para pots
 
-	ADC0->SEQ_CTRL[0] |= (1 << 31); //Enable Seq A
+	ADC0->SEQ_CTRL[0] |= (254 << 0); // Activo los pines de los ADC 1 al 7
+	ADC0->SEQ_CTRL[0] |= (1 << 31);  // Enable Seq A
 
 }

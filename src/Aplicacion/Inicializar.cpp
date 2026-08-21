@@ -56,6 +56,7 @@ void Inicializar ( void )
 	ledR.Apagar();
 	SysTick_Config(30000);
 	DacConfig();
+	AdcConfig();
 
 
 }
