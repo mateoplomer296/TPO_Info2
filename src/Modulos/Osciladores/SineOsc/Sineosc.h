@@ -15,7 +15,7 @@
 class Sineosc : public Oscilador
 {
 private:
-	static constexpr uint16_t TABLE_SIZE = 512;
+	static constexpr uint16_t TABLE_SIZE = 256;
 	static uint16_t s_table[TABLE_SIZE];
 	static bool     s_tableReady;
 
@@ -37,7 +37,7 @@ private:
 
 protected:
 
-	uint16_t lookupShape(uint32_t phase)override;
+	uint16_t lookupShape(uint32_t phase, uint16_t amplitud)override;
 };
 
 #endif /* MODULOS_OSCILADORES_SINEOSC_H_ */

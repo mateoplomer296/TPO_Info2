@@ -31,6 +31,8 @@ Sineosc sine(440000,128);
 Squareosc squa(440000,128);
 Sawosc saw (44000,128);
 
+ADCScanner scanner;
+ADSR adsr;
 void Scheduler (void){
 	uint8_t i;
 	for(i=0; i<PerifericoTemporizado::m_countPerifericosTemporizados; i++)

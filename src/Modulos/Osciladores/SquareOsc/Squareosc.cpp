@@ -12,9 +12,9 @@ Squareosc::Squareosc(uint32_t freq_hz, uint16_t amplitude):Oscilador(freq_hz, am
 
 }
 
-uint16_t Squareosc::lookupShape(uint32_t phase)
+uint16_t Squareosc::lookupShape(uint32_t phase, uint16_t amplitud)
 {
-	return (phase >> 31) * m_amplitude;
+	return (phase >> 31) * amplitud;
 }
 
 Squareosc::~Squareosc() {}

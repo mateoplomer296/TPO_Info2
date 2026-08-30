@@ -15,10 +15,13 @@ Sineosc::Sineosc(uint32_t freq_hz, uint16_t amplitude):Oscilador(freq_hz, amplit
 	buildTable();
 }
 
-uint16_t  Sineosc::lookupShape(uint32_t phase)
+uint16_t  Sineosc::lookupShape(uint32_t phase, uint16_t amplitud)
 {
-    uint32_t indice = phase >> 23;		// 256 = 24, 512 = 23, 1024 = 22. Cambiar segun tablesize
-    return (s_table[indice] * m_amplitude) >> 9;
+    uint32_t indice = phase >> 24;		// 256 = 24, 512 = 23, 1024 = 22. Cambiar segun tablesize
+    // Centrar en 0 (-512 a 511), escalar, recentrar en 512
+       int32_t centered = (int32_t)s_table[indice] - 512;
+       centered = (centered * (int32_t)amplitud) >> 9;
+       return (uint16_t)(centered + 512);
 }
 
 void Sineosc::buildTable()

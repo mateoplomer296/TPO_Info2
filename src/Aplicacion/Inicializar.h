@@ -25,6 +25,8 @@
 #include "Ctimer.h"
 #include "DacConfig.h"
 #include "AdcConfig.h"
+#include "AdcScanner.h"
+#include "ADSR.h"
 
 extern Gpio Rele;
 
@@ -39,6 +41,8 @@ extern Sineosc sine;
 extern Squareosc squa;
 extern Sawosc saw;
 
+extern ADCScanner scanner;
+extern ADSR adsr;
 void Scheduler (void);
 void Callback1(void);
 void Callback2(void);

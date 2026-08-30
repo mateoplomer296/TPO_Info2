@@ -16,7 +16,7 @@ public:
 
 protected:
 
-	uint16_t lookupShape(uint32_t phase)override;
+	uint16_t lookupShape(uint32_t phase, uint16_t amplitud)override;
 };
 
 #endif /* MODULOS_OSCILADORES_TRIOSC_TRIOSC_H_ */

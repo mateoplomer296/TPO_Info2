@@ -12,9 +12,9 @@ Sawosc::Sawosc(uint32_t freq_hz, uint16_t amplitude):Oscilador(freq_hz, amplitud
 
 }
 
-uint16_t Sawosc::lookupShape(uint32_t phase)
+uint16_t Sawosc::lookupShape(uint32_t phase, uint16_t amplitud)
 {
-	return (uint16_t)(((uint64_t)phase * m_amplitude) >> 32);
+	return (uint16_t)(((uint64_t)phase * amplitud) >> 32);
 }
 
 Sawosc::~Sawosc() {}

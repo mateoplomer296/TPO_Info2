@@ -19,9 +19,9 @@
     // Retorna valor entre 0 y 1023 (centrado en 512 = silencio).
     // Llamado desde ISR — debe ser rapido.
    // virtual uint16_t nextSample() = 0;
-    uint16_t Oscilador::nextSample(){
+    uint16_t Oscilador::nextSample(uint16_t amplitud){
         	m_phaseAcc += m_phaseInc;       // Todas las ondas hacen esto
-    		return lookupShape(m_phaseAcc);
+    		return lookupShape(m_phaseAcc, amplitud);
         };
 
     void Oscilador::setFreq(uint32_t freq_mHz) {

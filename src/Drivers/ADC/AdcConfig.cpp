@@ -12,13 +12,13 @@
 void AdcConfig(void)
 {
 	SYSCON->SYSAHBCLKCTRL0 |= (1<<24);  	//Enable clock for ADC
-	SYSCON->PDRUNCFG 	   &= ~(1 << 4); 	//Power DAC0
+	SYSCON->PDRUNCFG 	   &= ~(1 << 4); 	//Power ADC0
 	SYSCON->SYSAHBCLKCTRL0 |= (1<<7); 		//Enable clock for Switch Matrix
 	SWM0->PINENABLE0 &= ~( (1<<15)|(1<<16)|(1<<17)|				//Habilitar ADC en PIO0_6, PIO0_14, PIO0_23
 	                      (1<<18)|(1<<19)|(1<<20)|(1<<21) );   	// PIO0_22, PIO0_21, PIO0_20, PIO0_19
 
 	ADC0->CTRL |= (1 << 30)   // CALMODE: iniciar calibracion
-             | (59 << 0);   // CLKDIV = 29 → 30MHz/60 = 500kHz para calibracion
+             | (59 << 0);   // CLKDIV = 59 → 30MHz/60 = 500kHz para calibracion
 
 	while(ADC0->CTRL & (1 << 30)); //espera a que se termine de calibrar
 

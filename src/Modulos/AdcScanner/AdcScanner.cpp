@@ -25,7 +25,7 @@ void ADCScanner::HandlerDelPeriferico()
 	}
 
 	m_primerTick = false;
-	ADC0->SEQ_CTRL[0] |= (1 << 26);
+	ADC0->SEQ_CTRL[0] |= (1 << 26); //start
 }
 uint16_t ADCScanner::getParam(uint8_t index)
 {

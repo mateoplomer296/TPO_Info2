@@ -16,7 +16,7 @@ class Oscilador{
 	uint32_t m_phaseAcc;     // acumulador de fase (0 a 0xFFFFFFFF)
 	volatile uint32_t m_phaseInc;     // incremento por sample (depende de freq)
 	volatile uint16_t m_amplitude;    // 0 a 512 (512 = amplitud maxima)
-	virtual  uint16_t lookupShape(uint32_t phase) = 0;
+	virtual  uint16_t lookupShape(uint32_t phase, uint16_t amplitud) = 0;
 	static const uint32_t SAMPLE_RATE = 22050;
 
 
@@ -33,7 +33,7 @@ class Oscilador{
    public:
 
 	Oscilador(uint32_t freq_hz = 440000, uint16_t amplitude = 512);
-    uint16_t nextSample();
+    uint16_t nextSample(uint16_t amplitud);
     void setFreq(uint32_t freq_mHz);
 
     // amplitude: 0 (silencio) a 512 (maximo)
