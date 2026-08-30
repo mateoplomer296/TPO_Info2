@@ -10,19 +10,19 @@
 #include "tipos.h"
 class ADSR {
 private:
-	uint16_t m_amplitudActual;
-	uint16_t m_incAttack;
-	uint16_t m_decDecay;
-	uint16_t m_decRelease;
-	uint16_t m_nivSustain;
-	uint16_t m_volumen;
+	uint32_t m_amplitudActual;
+	uint32_t m_incAttack;
+	uint32_t m_decDecay;
+	uint32_t m_decRelease;
+	uint32_t m_nivSustain;
+	uint32_t m_volumen;
 
-	enum Estados {SILENCIO, ATTACK, DECAY, SUSTAIN, RELEASE};
-	Estados m_estado;
+
 
 
 public:
-
+	enum Estados {SILENCIO, ATTACK, DECAY, SUSTAIN, RELEASE};
+		Estados m_estado;
 
     void update();          // llamado desde CallbackAudio a 22050Hz
                             // contiene el switch con la maquina de estados
@@ -42,6 +42,9 @@ public:
     void setRelease(uint16_t potval);
     void setVolumen(uint16_t potval);
 	ADSR();
+
+	uint16_t getVolumen();
+	uint16_t getIncAttack();
 	virtual ~ADSR();
 };
 

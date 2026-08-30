@@ -7,7 +7,15 @@
 
 #include <ADSR/ADSR.h>
 
-ADSR::ADSR() {}
+ADSR::ADSR() :
+m_amplitudActual(0),
+m_incAttack(1),
+m_decDecay(1),
+m_decRelease(1),
+m_nivSustain(256000),
+m_volumen(512000),
+m_estado(SILENCIO)
+{}
 
 void ADSR::update() // llamado desde CallbackAudio a 22050Hz. contiene el switch con la maquina de estados
 {
@@ -40,16 +48,8 @@ void ADSR::update() // llamado desde CallbackAudio a 22050Hz. contiene el switch
 		break;
 
 	case SUSTAIN:
-		if(m_amplitudActual <= m_nivSustain + m_decDecay)  // ← se pasaría?
-		{
-			m_amplitudActual = m_nivSustain;
-			m_estado = SUSTAIN;
-		}
-		else
-		{
-			m_amplitudActual -= m_decDecay;
-		}
-		break;
+	    m_amplitudActual = m_nivSustain;
+	    break;
 
 	case RELEASE:
 
@@ -68,48 +68,54 @@ void ADSR::update() // llamado desde CallbackAudio a 22050Hz. contiene el switch
 
 void ADSR::noteOn() // llamado desde Keyboard al presionar tecla
 {
-
+	m_estado = ATTACK;
 }
                           // cambia estado a ATTACK
 
 void ADSR::noteOff() // llamado desde Keyboard al soltar tecla
 {
-
+	m_estado = RELEASE;
 }                         // cambia estado a RELEASE
 
 uint16_t ADSR::getAmplitud()
 {
-	return m_amplitudActual;
+	return (uint16_t)(m_amplitudActual / 1000);
 	// devuelve m_amplitudActual para pasarla al oscilador
 }
 
 
+
+
 // Setters llamados desde el while del main con los valores del ADCScanner
-void ADSR::setAttack(uint16_t potval)
-{
-	uint16_t tiempoMs = 1 + (potval * 2000 / 4095); //de 1 a 2000ms
-	m_incAttack = 512 / (tiempoMs * 22);  // 22 ≈ 22.050
-	if(m_incAttack == 0) m_incAttack = 1; //si el tiempo es muy largo evito redondeo a 0
+void ADSR::setAttack(uint16_t potval) {
+    // potval 0-4095 → tiempo 10ms a 5000ms
+    uint32_t tiempoMs = 10 + ((uint32_t)potval * 4990 / 4095);
+    m_incAttack = 512000 / (tiempoMs * 22);
+    if(m_incAttack == 0) m_incAttack = 1;  //si el tiempo es muy largo evito redondeo a 0
 }
-void ADSR::setDecay(uint16_t potval)
-{
-	uint16_t tiempoMs = 1 + (potval * 2000 / 4095); //de 1 a 2000ms
-	m_decDecay = 512 / (tiempoMs * 22);  // 22 ≈ 22.050
-	if(m_decDecay == 0) m_decDecay = 1; //si el tiempo es muy largo evito redondeo a 0
+
+void ADSR::setDecay(uint16_t potval) {
+    // potval 0-4095 → tiempo 10ms a 5000ms
+    uint32_t tiempoMs = 10 + ((uint32_t)potval * 4990 / 4095);
+    m_decDecay = 512000 / (tiempoMs * 22);
+    if(m_decDecay == 0) m_decDecay = 1;		//si el tiempo es muy largo evito redondeo a 0
 }
-void ADSR::setSustain(uint16_t potval) // nivel 0-512
-{
-	m_nivSustain = (512 * potval) / 4095;
+
+void ADSR::setSustain(uint16_t potval) {
+    // potval 0-4095 → nivel 0 a 512000
+    m_nivSustain = ((uint32_t)potval * 512000) / 4095;
 }
-void ADSR::setRelease(uint16_t potval)
-{
-	uint16_t tiempoMs = 1 + (potval * 2000 / 4095); //de 1 a 2000ms
-	m_decRelease = 512 / (tiempoMs * 22);  // 22 ≈ 22.050
-	if(m_decRelease == 0) m_decRelease = 1; //si el tiempo es muy largo evito redondeo a 0
+
+void ADSR::setRelease(uint16_t potval) {
+    // potval 0-4095 → tiempo 10ms a 5000ms
+    uint32_t tiempoMs = 10 + ((uint32_t)potval * 4990 / 4095);
+    m_decRelease = 512000 / (tiempoMs * 22);
+    if(m_decRelease == 0) m_decRelease = 1;		//si el tiempo es muy largo evito redondeo a 0
 }
-void ADSR::setVolumen(uint16_t potval)
-{
-	m_volumen = (512 * potval) / 4095;
+
+void ADSR::setVolumen(uint16_t potval) {
+    // potval 0-4095 → volumen 0 a 512000
+    m_volumen = ((uint32_t)potval * 512000) / 4095;
 }
 
 ADSR::~ADSR() {}

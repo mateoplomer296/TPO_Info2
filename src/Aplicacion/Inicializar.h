@@ -34,8 +34,8 @@ extern Led ledV;
 extern Led ledR;
 extern Led ledA;
 
-extern DigitalInputs Start;
-extern DigitalInputs Stop;
+extern DigitalInputs teclaOn;
+extern DigitalInputs teclaOff;
 
 extern Sineosc sine;
 extern Squareosc squa;

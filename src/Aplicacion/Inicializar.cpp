@@ -22,8 +22,8 @@ Led ledR(1,2); // ROJO
 // Entradas Digitales
 //Gpio g_I0( Gpio::PORT0 , 4 , Gpio::ENTRADA , Gpio::BAJO );
 //Gpio g_I1( Gpio::PORT0 , 7 , Gpio::ENTRADA , Gpio::BAJO );
-DigitalInputs Start(0,4,Gpio::BAJO);
-DigitalInputs Stop(0,12,Gpio::BAJO);
+DigitalInputs teclaOn(0,4,Gpio::BAJO);
+DigitalInputs teclaOff(0,12,Gpio::BAJO);
 //Intext Emergencia(0,0,12,CallbackE);
 
 //Gpio buzzer(0,29,Gpio::SALIDA,Gpio::ALTO);
