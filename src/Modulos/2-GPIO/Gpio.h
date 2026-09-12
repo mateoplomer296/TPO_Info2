@@ -27,7 +27,7 @@ class Gpio : public In , Out
 		enum DIRECCION {ENTRADA,SALIDA};
 		enum PUERTOS { PORT0,PORT1};
 		enum MODE_OUTPUT {PUSHPULL, OPENCOLECTOR};
-		enum MODE_INTPUT {INACTIVE, PULLDOWN, PULLUP, REPEATER};
+		enum MODE_INPUT {INACTIVE, PULLDOWN, PULLUP, REPEATER};
 
 		Gpio();
 		Gpio( uint8_t port , uint8_t pin ,uint8_t mode, uint8_t direccion ,uint8_t actividad = ALTO);

@@ -27,8 +27,9 @@
 #include "AdcConfig.h"
 #include "AdcScanner.h"
 #include "ADSR.h"
+#include "Teclado.h"
 
-extern Gpio Rele;
+
 
 extern Led ledV;
 extern Led ledR;
@@ -38,11 +39,34 @@ extern DigitalInputs teclaOn;
 extern DigitalInputs teclaOff;
 
 extern Sineosc sine;
+extern Sineosc mod;
 extern Squareosc squa;
 extern Sawosc saw;
 
 extern ADCScanner scanner;
-extern ADSR adsr;
+extern ADSR adsr_car;
+extern ADSR adsr_mod;
+
+extern Teclado teclado;
+
+//extern Gpio col0;
+//extern Gpio fil0;
+const uint32_t NOTAS[12] = {
+    261626,  // Do
+    277183,  // Do#
+    293665,  // Re
+    311127,  // Re#
+    329628,  // Mi
+    349228,  // Fa
+    369994,  // Fa#
+    391995,  // Sol
+    415305,  // Sol#
+    440000,  // La
+    466164,  // La#
+    493883,  // Si
+};
+
+
 void Scheduler (void);
 void Callback1(void);
 void Callback2(void);

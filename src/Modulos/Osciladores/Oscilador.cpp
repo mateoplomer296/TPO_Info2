@@ -28,6 +28,10 @@
         m_phaseInc = freqToPhaseInc(freq_mHz);
     }
 
+    void Oscilador::setPhaseInc(uint32_t phaseInc) { // solo para no llamar a setFreq que consume muchos ciclos
+        m_phaseInc = phaseInc;
+    }
+
     // amplitude: 0 (silencio) a 512 (maximo)
     void Oscilador::setAmplitude(uint16_t amplitude) {
         m_amplitude = (amplitude > 512) ? 512 : amplitude;

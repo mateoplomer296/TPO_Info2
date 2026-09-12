@@ -6,11 +6,12 @@
  */
 
 #include "Ctimer.h"
-
+#include "Oscilador.h"
 void InicializarTimerAudio(){
 	SYSCON->SYSAHBCLKCTRL0 |= (1 << 25);
 	CTIMER->TCR |= 0x2; 					//Counter reset Enabled
-	CTIMER->MR0 |= 1359;					//Ticks = (30.000.000 / 22.050)  - 1
+	CTIMER->MR0 |= ((30000000 / SAMPLE_RATE) - 1);  // 1359;
+	//CTIMER->MR0 |= 1359;					//Ticks = (30.000.000 / 22.050)  - 1
 	CTIMER->MCR |= (1 << 0) | (1 << 1);		//Genera interrupcion y resetea timer
 
 	NVIC->ISER[0]  |=  (1 << 23);				//Enable CTIMER Interrupt

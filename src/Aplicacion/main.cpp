@@ -1,23 +1,16 @@
 #include "Inicializar.h"
 
 Timer timerled(Timer::SEG,Callback1);
-volatile uint32_t i = 200000;
-
-bool estadoAnteriorOn  = false;
-bool estadoAnteriorOff = false;
 
 
 
 void Callback1(void)
 {
-	i = i + 30000;
-	ledV.CambiarEstado();
-	sine.setFreq(i);
-	timerled.TimerStart(1);
+
 }
 void CallbackAudio(){
-	adsr.update();
-	uint16_t muestra = sine.nextSample(adsr.getAmplitud());
+	adsr_car.update();
+	uint16_t muestra = sine.nextSample(adsr_car.getAmplitud());
 	DacWrite(muestra);
 }
 int main(void) {
@@ -29,29 +22,34 @@ InicializarTimerAudio();
 
     while(1)
     {
-    	bool estadoActualOn  = teclaOn.get();
-		bool estadoActualOff = teclaOff.get();
-    	//timerled.TmrEvent();
-    	 uint16_t potVal = scanner.getParam(7);
 
-    	 uint32_t freq   = 220000 + (potVal * (550000 / 4095));
-    	 sine.setFreq(freq);
 
-    	 // Flanco ascendente teclaOn: antes era 0, ahora es 1
-    	     if(estadoActualOn && !estadoAnteriorOn)
-    	         adsr.noteOn();
+    	uint8_t tecla       = teclado.GetKey();
+    	uint8_t teclaSuelta = teclado.GetKeyReleased();
 
-    	     // Flanco ascendente teclaOff: antes era 0, ahora es 1
-    	     if(estadoActualOff && !estadoAnteriorOff)
-    	         adsr.noteOff();
+    	// Primero el release, luego el press
+    	if(teclaSuelta != NO_KEY) {
+    	    adsr_car.noteOff();
+    	   // adsr_mod.noteOff();
+    	}
 
-    	     estadoAnteriorOn  = estadoActualOn;
-    	     estadoAnteriorOff = estadoActualOff;
-    	     	 	 adsr.setAttack(2000);    // 2 segundos de attack
-    	       	     adsr.setDecay(1000);     // 1 segundo de decay
-    	       	     adsr.setSustain(2000);   // sustain a mitad
-    	      	     adsr.setRelease(2000);   // 2 segundos de release
-    	       	     adsr.setVolumen(4000);
+    	if(tecla != NO_KEY && tecla < 12) {
+    	    sine.setFreq(NOTAS[tecla]);
+
+    	    adsr_car.noteOn();
+    	 //   adsr_mod.noteOn();
+    	}
+
+
+
+
+
+
+				 adsr_car.setAttack(2000);    // 2 segundos de attack
+				 adsr_car.setDecay(1000);     // 1 segundo de decay
+				 adsr_car.setSustain(3000);   // sustain a mitad
+				 adsr_car.setRelease(2000);   // 2 segundos de release
+				 adsr_car.setVolumen(4000);
 
     }
     return 0 ;

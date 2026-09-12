@@ -27,12 +27,39 @@ DigitalInputs teclaOff(0,12,Gpio::BAJO);
 //Intext Emergencia(0,0,12,CallbackE);
 
 //Gpio buzzer(0,29,Gpio::SALIDA,Gpio::ALTO);
-Sineosc sine(440000,128);
+Sineosc sine(440000,512);
 Squareosc squa(440000,128);
 Sawosc saw (44000,128);
 
+
+
+Sineosc  mod(880000, 512);  // ratio 2x por defecto
+
 ADCScanner scanner;
-ADSR adsr;
+
+ADSR adsr_car;
+ADSR adsr_mod;
+
+
+
+Gpio col0(Gpio::PORT0,  26, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);   // scn — columnas
+Gpio col1(Gpio::PORT0,  25, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);
+Gpio col2(Gpio::PORT0,  30, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);
+Gpio col3(Gpio::PORT0,  30, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);
+
+Gpio fil0(Gpio::PORT0,  27, Gpio::PULLUP, Gpio::ENTRADA, Gpio::BAJO);  // ret — filas
+Gpio fil1(Gpio::PORT0,  28, Gpio::PULLUP, Gpio::ENTRADA, Gpio::BAJO);
+Gpio fil2(Gpio::PORT0,  31, Gpio::PULLUP, Gpio::ENTRADA, Gpio::BAJO);
+Gpio fil3(Gpio::PORT0,  31, Gpio::PULLUP, Gpio::ENTRADA, Gpio::BAJO);
+// Arrays terminados en nullptr — así la clase sabe cuántos hay
+Gpio* scans[]   = { &col0, &col1, &col2, &col3, nullptr };
+Gpio* returns[] = { &fil0, &fil1, &fil2, &fil3, nullptr };
+
+// Crear el teclado
+Teclado teclado(returns, scans);
+
+
+
 void Scheduler (void){
 	uint8_t i;
 	for(i=0; i<PerifericoTemporizado::m_countPerifericosTemporizados; i++)
@@ -53,7 +80,7 @@ void Inicializar ( void )
 	SYSCON->FRODIRECTCLKUEN |= 1;
 
 
-	ledV.Encender();
+	ledV.Apagar();
 	ledA.Apagar();
 	ledR.Apagar();
 	SysTick_Config(30000);

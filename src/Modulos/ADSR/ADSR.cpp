@@ -6,7 +6,7 @@
  */
 
 #include <ADSR/ADSR.h>
-
+#include "Oscilador.h"
 ADSR::ADSR() :
 m_amplitudActual(0),
 m_incAttack(1),
@@ -90,14 +90,21 @@ uint16_t ADSR::getAmplitud()
 void ADSR::setAttack(uint16_t potval) {
     // potval 0-4095 → tiempo 10ms a 5000ms
     uint32_t tiempoMs = 10 + ((uint32_t)potval * 4990 / 4095);
-    m_incAttack = 512000 / (tiempoMs * 22);
+
+
+    //m_incAttack = 512000 / (tiempoMs * 22);
+
+    m_incAttack = 512000 / (tiempoMs * (SAMPLE_RATE / 1000));
     if(m_incAttack == 0) m_incAttack = 1;  //si el tiempo es muy largo evito redondeo a 0
 }
 
 void ADSR::setDecay(uint16_t potval) {
     // potval 0-4095 → tiempo 10ms a 5000ms
     uint32_t tiempoMs = 10 + ((uint32_t)potval * 4990 / 4095);
-    m_decDecay = 512000 / (tiempoMs * 22);
+
+    //m_decDecay = 512000 / (tiempoMs * 22);
+
+    m_decDecay = 512000 / (tiempoMs * (SAMPLE_RATE / 1000));
     if(m_decDecay == 0) m_decDecay = 1;		//si el tiempo es muy largo evito redondeo a 0
 }
 
@@ -108,8 +115,13 @@ void ADSR::setSustain(uint16_t potval) {
 
 void ADSR::setRelease(uint16_t potval) {
     // potval 0-4095 → tiempo 10ms a 5000ms
+
+
     uint32_t tiempoMs = 10 + ((uint32_t)potval * 4990 / 4095);
-    m_decRelease = 512000 / (tiempoMs * 22);
+
+    //m_decRelease = 512000 / (tiempoMs * 22);
+
+    m_decRelease = 512000 / (tiempoMs * (SAMPLE_RATE / 1000));
     if(m_decRelease == 0) m_decRelease = 1;		//si el tiempo es muy largo evito redondeo a 0
 }
 

@@ -2,7 +2,7 @@
 
 #include "Led.h"
 
-Led::Led(uint8_t port , uint8_t pin):Gpio(port,pin,SALIDA,BAJO) {
+Led::Led(uint8_t port , uint8_t pin):Gpio(port,pin,PULLDOWN,SALIDA,BAJO) {
 
 }
 void Led::Encender(void){
