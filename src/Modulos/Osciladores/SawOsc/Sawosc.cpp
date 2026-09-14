@@ -7,7 +7,7 @@
 
 #include <SawOsc/Sawosc.h>
 
-Sawosc::Sawosc(uint32_t freq_hz, uint16_t amplitude):Oscilador(freq_hz, amplitude)
+Sawosc::Sawosc(uint32_t freq_mHz, uint16_t amplitude):Oscilador(freq_mHz, amplitude)
 {
 
 }

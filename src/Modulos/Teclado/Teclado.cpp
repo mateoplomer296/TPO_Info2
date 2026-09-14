@@ -42,7 +42,9 @@
 
 Teclado::Teclado ( Gpio **r , Gpio **s  ):m_ret(r),m_scn(s)
 {
+
 	m_TeclaEstadoInicial = 0 ;
+	m_ContadorRelease = 0;
 	m_TeclaCantidadDeRebotes  = NO_KEY;
 	m_BufferTeclado = NO_KEY;
 	m_BufferTecladoSuelto = NO_KEY;
@@ -62,9 +64,7 @@ Teclado::Teclado ( Gpio **r , Gpio **s  ):m_ret(r),m_scn(s)
 }
 
 
-Teclado::~Teclado() {
-	// TODO Auto-generated destructor stub
-}
+Teclado::~Teclado() {}
 ///***********************************************************************************************************************************
 // *** TABLAS PRIVADAS AL MODULO
 // **********************************************************************************************************************************/
@@ -88,6 +88,7 @@ uint8_t Teclado::TecladoHW ( void )
 			// Activo el pin a chequear
 			m_scn[i]->ClrPin();
 
+
 			for ( uint8_t j = 0 ; j < m_MaxReturns ; j++)
 			{
 				if ( m_ret[j]->GetPin( ) )
@@ -106,6 +107,38 @@ uint8_t Teclado::TecladoHW ( void )
 	return NO_KEY;
 }
 
+//uint8_t Teclado::TecladoHW ( void )
+//{
+//	if ( m_scn )
+//	{
+//		for ( uint8_t i = 0 ; i < m_MaxScans ; i++)
+//		{
+//			// Pongo todos en estado neutro
+//			for ( uint8_t j = 0 ; j < m_MaxScans ; j++ )
+//				m_scn[j]->SetPin() ;
+//
+//			// Activo el pin a chequear
+//			m_scn[i]->ClrPin();
+//
+//			for ( uint8_t j = 0 ; j < m_MaxReturns ; j++)
+//			{
+//				if ( m_ret[j]->GetPin( ) )
+//					return j + i * m_MaxReturns ;
+//			}
+//		}
+//	}
+//	else
+//	{
+//		for ( uint8_t j = 0 ; j < m_MaxReturns ; j++)
+//		{
+//			if ( m_ret[j]->GetPin( ) )
+//				return j  ;
+//		}
+//	}
+//	return NO_KEY;
+//}
+
+
 
 void Teclado::TecladoSW ( uint8_t TeclaEstadoActual )
 {
@@ -114,14 +147,27 @@ void Teclado::TecladoSW ( uint8_t TeclaEstadoActual )
 		// Si había una tecla confirmada y ahora no hay ninguna -> release
 		if(m_TeclaConfirmada != NO_KEY)
 		{
-			m_BufferTecladoSuelto = m_TeclaConfirmada;
-			m_TeclaConfirmada = NO_KEY;
+			m_ContadorRelease++;
+				if ( m_ContadorRelease >= m_MaxRebotes )
+				{
+					m_BufferTecladoSuelto = m_TeclaConfirmada;
+					m_TeclaConfirmada = NO_KEY;
+					m_ContadorRelease = 0;
+				}
+
+			m_TeclaCantidadDeRebotes = 0;
+			m_TeclaEstadoInicial = NO_KEY;
+			return;
 		}
 
 		// NoFue presionada o esta rebotando
 		m_TeclaCantidadDeRebotes = 0;
 		m_TeclaEstadoInicial = NO_KEY;
 		return ;
+	}
+	if ( TeclaEstadoActual == m_TeclaConfirmada )
+	{
+	    m_ContadorRelease = 0;
 	}
 
 	if ( m_TeclaCantidadDeRebotes == 0 )
@@ -155,10 +201,49 @@ void Teclado::TecladoSW ( uint8_t TeclaEstadoActual )
 	return ;
 }
 
+//void Teclado::TecladoSW ( uint8_t TeclaEstadoActual )
+//{
+//	if ( TeclaEstadoActual == NO_KEY )
+//	{
+//		// NoFue presionada o esta rebotando
+//		m_TeclaCantidadDeRebotes = 0;
+//		m_TeclaEstadoInicial = NO_KEY;
+//		return ;
+//	}
+//
+//	if ( m_TeclaCantidadDeRebotes == 0 )
+//	{
+//		m_TeclaEstadoInicial = TeclaEstadoActual;
+//		m_TeclaCantidadDeRebotes ++;
+//		return;
+//	}
+//
+//	if ( TeclaEstadoActual == m_TeclaEstadoInicial )
+//	{
+//		if ( m_TeclaCantidadDeRebotes < m_MaxRebotes )
+//		{
+//			m_TeclaCantidadDeRebotes ++;
+//			return;
+//		}
+//
+//		if (m_TeclaCantidadDeRebotes == m_MaxRebotes )
+//		{
+//			m_BufferTeclado = TeclaEstadoActual;
+//			m_TeclaCantidadDeRebotes ++;
+//		}
+//	}
+//	else
+//	{
+//		m_TeclaCantidadDeRebotes = 0;
+//		m_TeclaEstadoInicial = NO_KEY;
+//	}
+//	return ;
+//}
+
 
 uint8_t	Teclado::GetKey( void )
 {
-	uint8_t key = m_BufferTeclado;
+	 uint8_t key = m_BufferTeclado;
 	m_BufferTeclado = NO_KEY;
 	return key;
 }

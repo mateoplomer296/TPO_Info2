@@ -21,7 +21,7 @@
 /***********************************************************************************************************************************
  *** DEFINES GLOBALES
  **********************************************************************************************************************************/
-#define SAMPLERATE 22050
+//#define SAMPLERATE 22050
 
 /***********************************************************************************************************************************
  *** MACROS GLOBALES
@@ -1151,6 +1151,21 @@ typedef struct
 #define NVIC_BASE           (SCS_BASE +  0x0100UL)                    /*!< NVIC Base Address */
 #define SCB_BASE            (SCS_BASE +  0x0D00UL)                    /*!< System Control Block Base Address */
 
+
+typedef struct
+{
+  __I  uint32_t CPUID;
+  __IO uint32_t ICSR;
+  __IO uint32_t VTOR;
+  __IO uint32_t AIRCR;
+  __IO uint32_t SCR;
+  __IO uint32_t CCR;
+  __IO uint32_t RESERVED;
+  __IO uint32_t SHPR2;
+  __IO uint32_t SHPR3;                 /*!< Offset: 0x300 (R/W)  Interrupt Priority Register */
+}SCB_Type;
+
+#define SCB					((SCB_Type        *)    SCB_BASE)
 #define NVIC                ((NVIC_Type      *)     NVIC_BASE     )   /*!< NVIC configuration struct */
 
 /* ----------------------------------------------------------------------------

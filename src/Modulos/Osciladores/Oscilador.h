@@ -9,7 +9,7 @@
 #define MODULOS_OSCILADORES_OSCILADOR_H_
 
 #include "tipos.h"
-static const uint32_t SAMPLE_RATE = 44100;
+static const uint32_t SAMPLE_RATE = 30000;
 
 class Oscilador{
 	protected:

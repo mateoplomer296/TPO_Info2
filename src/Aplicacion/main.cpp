@@ -1,6 +1,6 @@
 #include "Inicializar.h"
 
-Timer timerled(Timer::SEG,Callback1);
+//Timer timerled(Timer::SEG,Callback1);
 
 
 
@@ -13,6 +13,9 @@ void CallbackAudio(){
 	uint16_t muestra = sine.nextSample(adsr_car.getAmplitud());
 	DacWrite(muestra);
 }
+
+
+
 int main(void) {
 CTimer_SetHandler( CallbackAudio );
 Inicializar();
@@ -28,28 +31,33 @@ InicializarTimerAudio();
     	uint8_t teclaSuelta = teclado.GetKeyReleased();
 
     	// Primero el release, luego el press
-    	if(teclaSuelta != NO_KEY) {
-    	    adsr_car.noteOff();
-    	   // adsr_mod.noteOff();
-    	}
 
-    	if(tecla != NO_KEY && tecla < 12) {
+
+    	if(tecla != NO_KEY && tecla < 12)
+    	{
+
+
     	    sine.setFreq(NOTAS[tecla]);
-
     	    adsr_car.noteOn();
+
     	 //   adsr_mod.noteOn();
     	}
 
+    	if(teclaSuelta != NO_KEY)
+    	    	{
+    	    	    adsr_car.noteOff();
+    	    	   // adsr_mod.noteOff();
+    	    	}
 
 
 
 
 
-				 adsr_car.setAttack(2000);    // 2 segundos de attack
+				 adsr_car.setAttack(500);    // 0.5 segundos de attack
 				 adsr_car.setDecay(1000);     // 1 segundo de decay
-				 adsr_car.setSustain(3000);   // sustain a mitad
-				 adsr_car.setRelease(2000);   // 2 segundos de release
-				 adsr_car.setVolumen(4000);
+				 adsr_car.setSustain(1000);   // sustain a mitad
+				 adsr_car.setRelease(3500);   // 2 segundos de release
+				 adsr_car.setVolumen(1000);
 
     }
     return 0 ;

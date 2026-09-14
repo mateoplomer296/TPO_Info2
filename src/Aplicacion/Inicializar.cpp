@@ -29,7 +29,7 @@ DigitalInputs teclaOff(0,12,Gpio::BAJO);
 //Gpio buzzer(0,29,Gpio::SALIDA,Gpio::ALTO);
 Sineosc sine(440000,512);
 Squareosc squa(440000,128);
-Sawosc saw (44000,128);
+Sawosc saw (440000,512);
 
 
 
@@ -40,17 +40,15 @@ ADCScanner scanner;
 ADSR adsr_car;
 ADSR adsr_mod;
 
+Gpio col0(Gpio::PORT0,  11, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);   // scn — columnas
+Gpio col1(Gpio::PORT0,  10, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);
+Gpio col2(Gpio::PORT0,  9, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);
+Gpio col3(Gpio::PORT0,  8, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);
 
-
-Gpio col0(Gpio::PORT0,  26, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);   // scn — columnas
-Gpio col1(Gpio::PORT0,  25, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);
-Gpio col2(Gpio::PORT0,  30, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);
-Gpio col3(Gpio::PORT0,  30, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);
-
-Gpio fil0(Gpio::PORT0,  27, Gpio::PULLUP, Gpio::ENTRADA, Gpio::BAJO);  // ret — filas
-Gpio fil1(Gpio::PORT0,  28, Gpio::PULLUP, Gpio::ENTRADA, Gpio::BAJO);
-Gpio fil2(Gpio::PORT0,  31, Gpio::PULLUP, Gpio::ENTRADA, Gpio::BAJO);
-Gpio fil3(Gpio::PORT0,  31, Gpio::PULLUP, Gpio::ENTRADA, Gpio::BAJO);
+Gpio fil0(Gpio::PORT0,  26, Gpio::PULLUP, Gpio::ENTRADA, Gpio::BAJO);  // ret — filas
+Gpio fil1(Gpio::PORT0,  27, Gpio::PULLUP, Gpio::ENTRADA, Gpio::BAJO);
+Gpio fil2(Gpio::PORT0,  28, Gpio::PULLUP, Gpio::ENTRADA, Gpio::BAJO);
+Gpio fil3(Gpio::PORT0,  29, Gpio::PULLUP, Gpio::ENTRADA, Gpio::BAJO);
 // Arrays terminados en nullptr — así la clase sabe cuántos hay
 Gpio* scans[]   = { &col0, &col1, &col2, &col3, nullptr };
 Gpio* returns[] = { &fil0, &fil1, &fil2, &fil3, nullptr };
@@ -59,6 +57,17 @@ Gpio* returns[] = { &fil0, &fil1, &fil2, &fil3, nullptr };
 Teclado teclado(returns, scans);
 
 
+//
+//Gpio g_pulsador0 ( Gpio::PORT0 , 11 , Gpio::PULLUP , Gpio::ENTRADA , Gpio::ALTO );
+//Gpio g_pulsador1 ( Gpio::PORT0 , 27 , Gpio::PULLUP , Gpio::ENTRADA , Gpio::ALTO );
+//Gpio g_pulsador2 ( Gpio::PORT0 , 31 , Gpio::PULLUP , Gpio::ENTRADA , Gpio::ALTO );
+//Gpio g_pulsador3 ( Gpio::PORT0 ,  4 , Gpio::PULLUP , Gpio::ENTRADA , Gpio::BAJO );
+//Gpio g_pulsador4 ( Gpio::PORT0 , 29 , Gpio::PULLUP , Gpio::ENTRADA , Gpio::ALTO );
+//
+//Gpio *g_pulsadores[] = {&g_pulsador0 , &g_pulsador1, &g_pulsador2, &g_pulsador3 , &g_pulsador4 , nullptr};
+//
+//
+//Teclado teclado(g_pulsadores);
 
 void Scheduler (void){
 	uint8_t i;
@@ -83,6 +92,7 @@ void Inicializar ( void )
 	ledV.Apagar();
 	ledA.Apagar();
 	ledR.Apagar();
+
 	SysTick_Config(30000);
 	DacConfig();
 	AdcConfig();

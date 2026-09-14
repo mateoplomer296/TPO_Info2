@@ -47,10 +47,12 @@ class Teclado : public PerifericoTemporizado
 		Gpio **m_ret;
 		Gpio **m_scn;
 
+
 		uint8_t m_TeclaEstadoInicial ;
 		uint8_t m_TeclaCantidadDeRebotes ;
 		uint8_t m_BufferTeclado ;
 		uint8_t m_BufferTecladoSuelto;  //
+		uint8_t m_ContadorRelease;      //
 		uint8_t m_MaxRebotes;
 		int8_t m_MaxReturns;
 		int8_t m_MaxScans;

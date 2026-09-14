@@ -39,11 +39,15 @@ void ADSR::update() // llamado desde CallbackAudio a 22050Hz. contiene el switch
 		break;
 
 	case DECAY:
-		m_amplitudActual -= m_decDecay;
-		if(m_amplitudActual <= m_nivSustain)  // ← llegó al nivel?
+
+		if(m_amplitudActual <= (m_nivSustain + m_decDecay))  // ← llegó al nivel?
 			{
 				m_amplitudActual = m_nivSustain;  // ← clampear para no pasarse
 				m_estado = SUSTAIN;              // ← transición
+			}
+		else
+			{
+				m_amplitudActual -= m_decDecay;
 			}
 		break;
 
@@ -79,7 +83,8 @@ void ADSR::noteOff() // llamado desde Keyboard al soltar tecla
 
 uint16_t ADSR::getAmplitud()
 {
-	return (uint16_t)(m_amplitudActual / 1000);
+	uint32_t amp = (m_amplitudActual / 1000);
+	return (uint16_t)(amp > 512 ? 512 : amp);  // clampear a 512 máximo
 	// devuelve m_amplitudActual para pasarla al oscilador
 }
 
