@@ -57,8 +57,8 @@ Gpio* returns[] = { &fil0, &fil1, &fil2, &fil3, nullptr };
 Teclado teclado(returns, scans);
 
 
-//
-//Gpio g_pulsador0 ( Gpio::PORT0 , 11 , Gpio::PULLUP , Gpio::ENTRADA , Gpio::ALTO );
+
+Gpio pin_debug ( Gpio::PORT0 , 13 , Gpio::PULLUP , Gpio::SALIDA , Gpio::ALTO );
 //Gpio g_pulsador1 ( Gpio::PORT0 , 27 , Gpio::PULLUP , Gpio::ENTRADA , Gpio::ALTO );
 //Gpio g_pulsador2 ( Gpio::PORT0 , 31 , Gpio::PULLUP , Gpio::ENTRADA , Gpio::ALTO );
 //Gpio g_pulsador3 ( Gpio::PORT0 ,  4 , Gpio::PULLUP , Gpio::ENTRADA , Gpio::BAJO );

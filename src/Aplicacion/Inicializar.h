@@ -29,7 +29,7 @@
 #include "ADSR.h"
 #include "Teclado.h"
 
-
+extern Gpio pin_debug;
 
 extern Led ledV;
 extern Led ledR;

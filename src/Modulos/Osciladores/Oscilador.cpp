@@ -15,29 +15,30 @@
         m_phaseInc = freqToPhaseInc(freq_mHz);
     }
 
-    // Genera el siguiente sample de audio.
-    // Retorna valor entre 0 y 1023 (centrado en 512 = silencio).
-    // Llamado desde ISR — debe ser rapido.
-   // virtual uint16_t nextSample() = 0;
-    uint16_t Oscilador::nextSample(uint16_t amplitud){
-        	m_phaseAcc += m_phaseInc;       // Todas las ondas hacen esto
-    		return lookupShape(m_phaseAcc, amplitud);
-        };
 
-    void Oscilador::setFreq(uint32_t freq_mHz) {
+
+    void Oscilador::setFreq(uint32_t freq_mHz)
+    {
         m_phaseInc = freqToPhaseInc(freq_mHz);
     }
 
-    void Oscilador::setPhaseInc(uint32_t phaseInc) { // solo para no llamar a setFreq que consume muchos ciclos
-        m_phaseInc = phaseInc;
-    }
+
+
+    uint32_t Oscilador::freqToPhaseInc(uint32_t freq_mHz) //milihertz
+	{
+	   // Evitamos overflow de 32 bits operando en 64 bits.
+	   // El compilador del LPC845 soporta uint64_t.
+		return (uint32_t)((((uint64_t)freq_mHz) << 32) / (SAMPLE_RATE * 1000));
+	}
 
     // amplitude: 0 (silencio) a 512 (maximo)
-    void Oscilador::setAmplitude(uint16_t amplitude) {
+    void Oscilador::setAmplitude(uint16_t amplitude)
+    {
         m_amplitude = (amplitude > 512) ? 512 : amplitude;
     }
 
-    void Oscilador::reset() {
+    void Oscilador::reset()
+    {
         m_phaseAcc = 0;
     }
 
