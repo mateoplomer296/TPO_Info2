@@ -120,5 +120,3 @@ void PININT2_IRQHandler(void){ intexts[2]->limpiar_irq();}
 void PININT3_IRQHandler(void){ intexts[3]->limpiar_irq();}
 void PININT4_IRQHandler(void){ intexts[4]->limpiar_irq();}
 void PININT5_IRQHandler(void){ intexts[5]->limpiar_irq();}
-void PININT6_IRQHandler(void){ intexts[6]->limpiar_irq();}
-void PININT7_IRQHandler(void){ intexts[7]->limpiar_irq();}

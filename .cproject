@@ -63,6 +63,8 @@
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Modulos/AdcScanner}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Modulos/ADSR}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Modulos/Teclado}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Modulos/LCD}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Modulos/12-USART}&quot;"/>
 								</option>
 								<option id="com.crt.advproject.cpp.exe.debug.option.optimization.level.1580141454" name="Optimization Level" superClass="com.crt.advproject.cpp.exe.debug.option.optimization.level" useByScannerDiscovery="true" value="gnu.cpp.compiler.optimization.level.more" valueType="enumerated"/>
 								<inputType id="com.crt.advproject.compiler.cpp.input.1069509343" superClass="com.crt.advproject.compiler.cpp.input"/>
@@ -156,6 +158,8 @@
 								<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Modulos/AdcScanner}&quot;"/>
 								<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Modulos/ADSR}&quot;"/>
 								<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Modulos/Teclado}&quot;"/>
+								<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Modulos/LCD}&quot;"/>
+								<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/src/Modulos/12-USART}&quot;"/>
 							</option>
 							<inputType id="com.crt.advproject.compiler.cpp.input.742636417" superClass="com.crt.advproject.compiler.cpp.input"/>
 						</tool>

@@ -46,14 +46,12 @@ InicializarTimerAudio();
     	uint8_t tecla       = teclado.GetKey();
     	uint8_t teclaSuelta = teclado.GetKeyReleased();
 
-volatile uint16_t parametrititi = scanner.getParam(5);
-
     	 uint32_t ratio = 1 + ((scanner.getParam(7) * 7) / 4095);
 
     	if(tecla != NO_KEY && tecla < 12)
     	{
 
-    		parametrititi += 1;
+
     	    sine.setFreq(NOTAS[tecla]);
     	    sine_phaseIncBase = sine.getPhaseInc();
     	    mod.setFreq(NOTAS[tecla] * ratio);

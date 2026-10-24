@@ -28,6 +28,8 @@
 #include "AdcScanner.h"
 #include "ADSR.h"
 #include "Teclado.h"
+#include "Lcd.h"
+#include "Uart.h"
 
 extern Gpio pin_debug;
 
