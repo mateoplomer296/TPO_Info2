@@ -55,7 +55,7 @@ Uart::Uart(
 		uint32_t maxRx ,			// Tamaño del buffer de RX
 		uint32_t maxTx)				// Tamaño del buffer de RX
 {
-	uint8_t iser ;
+	uint8_t iser = 0 ;
 	m_usart = USARTS[usart];					// USART seleccionada
 
 	m_bufferRX = new uint8_t[ maxRx ];	// buffer de Rx
@@ -120,7 +120,7 @@ Uart::Uart(
 				| ( 0 << 6 )					// 0=1BITSTOP 1=2BITSTOP
 				| ( 0 << 9 )					// 0=NOFLOWCONTROL 1=FLOWCONTROL
 				| ( 0 << 11 )					// 0=ASINCRONICA 1=SINCRONICA
-				| ( 1 << 15 );					// LOOP
+				| ( 0 << 15 );					// LOOP
 
 	// OSR vale por default 16
 	USARTS[usart]->BRG = (( 48000000UL / baudrate ) / ( m_usart->OSR +1 )) - 1;
