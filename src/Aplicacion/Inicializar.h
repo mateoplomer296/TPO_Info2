@@ -8,6 +8,9 @@
 #ifndef APLICACION_INICIALIZAR_H_
 #define APLICACION_INICIALIZAR_H_
 
+#include <ADC/AdcConfig.h>
+#include <DAC/DacConfig.h>
+#include <Intext/intext.h>
 #include "Sineosc.h"
 #include "Squareosc.h"
 #include "Sawosc.h"
@@ -20,16 +23,15 @@
 #include "digital_outputs.h"
 #include "Timer.h"
 #include "systick.h"
-#include "intext.h"
 #include "LPC845.h"
 #include "Ctimer.h"
-#include "DacConfig.h"
-#include "AdcConfig.h"
 #include "AdcScanner.h"
 #include "ADSR.h"
 #include "Teclado.h"
 #include "Lcd.h"
 #include "Uart.h"
+#include "Aplicacion.h"
+#include "Sintetizador.h"
 
 extern Gpio pin_debug;
 
@@ -51,22 +53,11 @@ extern ADSR adsr_mod;
 
 extern Teclado teclado;
 
+
+extern Sintetizador Synth;
 //extern Gpio col0;
 //extern Gpio fil0;
-const uint32_t NOTAS[12] = {
-    261626,  // Do
-    277183,  // Do#
-    293665,  // Re
-    311127,  // Re#
-    329628,  // Mi
-    349228,  // Fa
-    369994,  // Fa#
-    391995,  // Sol
-    415305,  // Sol#
-    440000,  // La
-    466164,  // La#
-    493883,  // Si
-};
+
 
 
 void Scheduler (void);

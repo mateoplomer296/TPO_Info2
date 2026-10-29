@@ -6,8 +6,8 @@
  */
 
 
+#include <DAC/DacConfig.h>
 #include "LPC845.h"
-#include "DacConfig.h"
 
 void DacConfig(void)
 {

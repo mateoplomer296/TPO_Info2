@@ -5,12 +5,12 @@
  *      Author: joaqu
  */
 
-#ifndef DRIVERS_DAC_DACCONFIG_H_
-#define DRIVERS_DAC_DACCONFIG_H_
+#ifndef MODULOS_DAC_DACCONFIG_H_
+#define MODULOS_DAC_DACCONFIG_H_
 
-
+#include "LPC845.h"
 void DacConfig(void);
 void DacWrite(uint16_t value);
 
 
-#endif /* DRIVERS_DAC_DACCONFIG_H_ */
+#endif /* MODULOS_DAC_DACCONFIG_H_ */

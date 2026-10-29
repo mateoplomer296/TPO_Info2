@@ -5,7 +5,7 @@
  *      Author: joaqu
  */
 
-#include "AdcConfig.h"
+#include <ADC/AdcConfig.h>
 #include "LPC845.h"
 
 

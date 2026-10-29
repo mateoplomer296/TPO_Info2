@@ -17,7 +17,7 @@ class Oscilador{
 	volatile uint32_t m_phaseInc;     // incremento por sample (depende de freq)
 	volatile uint16_t m_amplitude;    // 0 a 512 (512 = amplitud maxima)
 	virtual  uint16_t lookupShape(uint32_t phase, uint16_t amplitud) = 0;
-	uint32_t freqToPhaseInc(uint32_t freq_mHz);
+
 
 
 	// Convierte frecuencia a phaseIncrement.
@@ -29,6 +29,7 @@ class Oscilador{
 
 	Oscilador(uint32_t freq_hz = 440000, uint16_t amplitude = 512);
 	uint32_t getPhaseInc() const { return m_phaseInc; }
+	static uint32_t freqToPhaseInc(uint32_t freq_mHz);
 
 	// Genera el siguiente sample de audio.
 	// Retorna valor entre 0 y 1023 (centrado en 512 = silencio).

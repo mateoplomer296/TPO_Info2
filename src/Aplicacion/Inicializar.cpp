@@ -27,13 +27,13 @@ DigitalInputs teclaOff(0,12,Gpio::BAJO);
 //Intext Emergencia(0,0,12,CallbackE);
 
 //Gpio buzzer(0,29,Gpio::SALIDA,Gpio::ALTO);
-Sineosc sine(440000,512);
-Squareosc squa(440000,128);
-Sawosc saw (440000,512);
-
-
-
-Sineosc  mod(880000, 512);  // ratio 2x por defecto
+//Sineosc sine(440000,512);
+//Squareosc squa(440000,128);
+//Sawosc saw (440000,512);
+//
+//
+//
+//Sineosc  mod(880000, 512);  // ratio 2x por defecto
 
 ADCScanner scanner;
 
@@ -56,7 +56,7 @@ Gpio* returns[] = { &fil0, &fil1, &fil2, &fil3, nullptr };
 // Crear el teclado
 Teclado teclado(returns, scans);
 
-
+Sintetizador Synth(teclado, scanner);
 
 Gpio pin_debug ( Gpio::PORT0 , 13 , Gpio::PULLUP , Gpio::SALIDA , Gpio::ALTO );
 //Gpio g_pulsador1 ( Gpio::PORT0 , 27 , Gpio::PULLUP , Gpio::ENTRADA , Gpio::ALTO );
