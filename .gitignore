@@ -12,3 +12,6 @@ Release/
 
 # Configuraciones temporales del IDE del usuario
 .launches/
+# Workspace y caché del IDE
+.metadata/
+.mcuxpressoide_packages_support/
