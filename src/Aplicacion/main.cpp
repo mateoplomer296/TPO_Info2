@@ -48,17 +48,6 @@ InicializarTimerAudio();
 
 
 
-//				 adsr_car.setAttack(100);    // 0.5 segundos de attack
-//				 adsr_car.setDecay(1000);     // 1 segundo de decay
-//				 adsr_car.setSustain(1000);   // sustain a mitad
-//				 adsr_car.setRelease(1000);   // 2 segundos de release
-//				 adsr_car.setVolumen(1000);
-//
-//				 adsr_mod.setAttack(200);
-//				 adsr_mod.setDecay(300);
-//				 adsr_mod.setSustain(000);
-//				 adsr_mod.setRelease(2000);
-//				 adsr_mod.setVolumen(scanner.getParam(5));
 
     }
     return 0 ;
