@@ -32,6 +32,7 @@
 #include "Uart.h"
 #include "Aplicacion.h"
 #include "Sintetizador.h"
+#include <ModoRemoto/MaquinaEstadosUart.h>
 
 extern Gpio pin_debug;
 
@@ -50,6 +51,8 @@ extern Sawosc saw;
 extern ADCScanner scanner;
 extern ADSR adsr_car;
 extern ADSR adsr_mod;
+
+extern Uart uart0;
 
 extern Teclado teclado;
 

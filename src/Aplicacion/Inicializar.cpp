@@ -40,6 +40,18 @@ ADCScanner scanner;
 ADSR adsr_car;
 ADSR adsr_mod;
 
+Uart uart0(
+		0 , 				// PortTx
+        25, 				// Pin Tx
+		0 ,					// PortRx
+		24, 				// Pin Rx
+		0 ,					// uart seleccionada
+		9600 ,				// baudios
+		Uart::ocho_bits ,	// bits de datos
+		Uart::NoParidad ,	// tipo de paridad
+		64,					// tamaño de buffer de Rx
+		64 );				// tamaño de buffer de Tx
+
 Gpio col0(Gpio::PORT0,  11, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);   // scn — columnas
 Gpio col1(Gpio::PORT0,  10, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);
 Gpio col2(Gpio::PORT0,  9, Gpio::PUSHPULL, Gpio::SALIDA, Gpio::ALTO);

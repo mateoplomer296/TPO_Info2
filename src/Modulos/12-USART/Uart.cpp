@@ -123,7 +123,7 @@ Uart::Uart(
 				| ( 0 << 15 );					// LOOP
 
 	// OSR vale por default 16
-	USARTS[usart]->BRG = (( 48000000UL / baudrate ) / ( m_usart->OSR +1 )) - 1;
+	USARTS[usart]->BRG = (( 30000000UL / baudrate ) / ( m_usart->OSR +1 )) - 1;
 
 	USARTS[usart]->INTENSET |= ( 1 << 0 );		// RX interrupcion
 

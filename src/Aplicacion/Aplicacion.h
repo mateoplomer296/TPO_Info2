@@ -30,6 +30,9 @@
 #include "Lcd.h"
 #include "Uart.h"
 
+void AtenderUart ( void );
+void ProcesarTrama(uint8_t*trama, uint8_t tamanio);
+
 
 
 

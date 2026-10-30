@@ -6,6 +6,7 @@
  */
 
 #include <Sintetizador/Sintetizador.h>
+#include <ModoRemoto/MaquinaEstadosUart.h>
 
 Sintetizador::Sintetizador(Teclado& t, ADCScanner& s) :
 	m_estado(STANDALONE), m_teclado(t), m_scanner(s),
@@ -131,7 +132,7 @@ void Sintetizador::estadoStandalone()//ignorar uart, valores adsr por pots
 }
 void Sintetizador::estadoRemote()//ignorar pots fisicos, manejado por uart
 {
-
+	MaquinaEstadosUart();
 }
 void Sintetizador::aplicarFrecuencia()
 {
@@ -164,8 +165,36 @@ void Sintetizador::actualizarLCD()
 
 void Sintetizador::iniciarRemoteUart()
 {
-
+	MaquinaEstadosUart();
 }
+
+void Sintetizador::remoteTecla(uint8_t id, uint16_t valor)
+{
+	if(m_estado != REMOTE)
+		return;
+	if(valor != 0 && id < 32)// la tecla esta presionada valor =1
+	{
+		m_frecBase = NOTAS[id];
+		aplicarFrecuencia();
+		m_car.noteOn();
+		m_mod.noteOn();
+	}
+	else // la tecla esta suelta valor = 0
+	{
+		m_car.noteOff();
+		m_mod.noteOff();
+	}
+}
+void Sintetizador::remotePote(uint8_t id, uint16_t valor)
+{
+	if(m_estado != REMOTE)
+		return;
+	if(id>=0 && id<=6)
+	{
+		m_paramRemoto[id]=valor;
+	}
+}
+
 Sintetizador::~Sintetizador() {
 	// TODO Auto-generated destructor stub
 }

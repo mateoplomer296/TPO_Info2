@@ -1,0 +1,16 @@
+/*
+ * RemotoConfig.h
+ *
+ *  Created on: 30 oct 2026
+ *      Author: elPapu777
+ */
+
+#ifndef MODULOS_SINTETIZADOR_MODOREMOTO_MAQUINAESTADOSUART_H_
+#define MODULOS_SINTETIZADOR_MODOREMOTO_MAQUINAESTADOSUART_H_
+
+
+void MaquinaEstadosUart(void);
+
+
+
+#endif /* MODULOS_SINTETIZADOR_MODOREMOTO_MAQUINAESTADOSUART_H_ */

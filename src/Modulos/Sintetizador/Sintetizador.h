@@ -16,6 +16,7 @@
 #include "Sawosc.h"
 #include "ADSR.h"
 #include "AdcScanner.h"
+
 class Sintetizador {
 public:
 enum Estado{STANDALONE, REMOTE};
@@ -23,6 +24,8 @@ Sintetizador(Teclado& teclado, ADCScanner& scanner);
 void ejecutar();                    // se llama en el while del main
 void cambiarEstado(Estado nuevo);
 uint16_t generarSample();
+void remoteTecla(uint8_t id, uint16_t valor);
+void remotePote(uint8_t id, uint16_t valor);
 virtual ~Sintetizador();
 
 
@@ -92,7 +95,7 @@ private:
 			739989,  // [30] Fa# 5
 			783991   // [31] Sol 5
 		};
-
+	uint16_t m_paramRemoto[8] = {0};
 
 
 private:

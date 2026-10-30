@@ -85,10 +85,10 @@ class Uart : public ComunicacionAsincronica
 		void Transmit ( void * msg , uint32_t n );
 		uint8_t Message ( void * msg , uint32_t n );
 		uint8_t Message ( void * msg );
+		uint8_t popRx (uint8_t * dato ) ;
 
 		void UART_IRQHandler (void);
 	private:
-		uint8_t popRx (uint8_t * dato ) ;
 		void pushRx ( uint8_t dato ) ;
 		void pushTx ( uint8_t dato ) ;
 		uint8_t popTx (uint8_t * dato ) ;
